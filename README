@@ -58,6 +58,8 @@ This assignment was incredibly challenging for me. When I completed the labs, I 
 
 When meeting with Ashlyn, she gave me great advice on breaking down a problem before trying to solve it. I often want to jump right into coding, but I now realize that it’s important to fully understand the specifications of exactly what I will be creating in order to make a better product.I will work on these concepts and prepare myself for the next phase of the assignment.
 
+I also broke my file a few times and had to create new repositories. Because of this I only have a few commits to show. I actually had many more, I just kept messing with my node dependencies and was confusing myself. It seemed easier at the time to start fresh than to go back on my commits and find the error. In the future, I will use my version control commits better and keep one consecutive file. 
+
 
 ### Reflections
 
@@ -66,5 +68,12 @@ For the authentication method, I chose to implement local authentication with mo
 I structured my access control system with two main roles: user and admin. This approach helped me better understand how to create routes that are accessible only to specific users. It was interesting to see this process in action through the Schema when connecting to the MongoDB database, as it allowed me to log each person's role. Initially, I had trouble saving the roles correctly, but after troubleshooting the syntax errors I encountered, I was able to establish a working connection and successfully implement the system.
 
 Because I was unable to get a functioning front-end, I was unable to implement the JWT storage. If I was to get this to work, I would have chosen the HTTPOnly cookie. From my research, I found this method to be much more secure in storing sensitive information, in particular helping avoid cross-side scripting attacks. 
+
+
+## FigJam Link (Extra Credit Diagrams)
+
+The following diagrams show my plan for implementing Google OAuth and session management.
+
+https://www.figma.com/board/4oCxBxNdWv4OZTmoJAjfSw/Untitled?node-id=0-1&t=FaOwcryp6vE1f9Bc-1
 
 

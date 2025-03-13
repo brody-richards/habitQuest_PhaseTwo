@@ -1,0 +1,70 @@
+# Phase Two | Habit Quest | Web Security
+
+## Setting up the Repository
+
+When setting up this repository, there are important instructions that must be followed:
+
+1. First, clone the repository and ensure all of the files are present. 
+
+    The dependencies that are to be installed include the following. 
+
+            "argon2": "^0.41.1",
+            "body-parser": "^1.20.3",
+            "dotenv": "^16.4.7",
+            "express": "^4.21.2",
+            "express-session": "^1.18.1",
+            "fs": "^0.0.1-security",
+            "helmet": "^8.0.0",
+            "hsts": "^2.2.0",
+            "https": "^1.0.0",
+            "jsonwebtoken": "^9.0.2",
+            "mongoose": "^8.12.1",
+            "passport": "^0.7.0",
+            "passport-google-oauth20": "^2.0.0"
+
+2. Once the files are downloaded from the GitHub repository, navigate to the root of the folder and run this command:
+'npm install argon2 body-parser dotenv express express-session fs helmet hsts https jsonwebtoken mongoose passport passport-google-oauth20'
+
+3. The files included in the .gitignore file include the .env, node_modules, and the certification.pem, the private-key.pem files. Running the above command will not give you the certification.pem or private-key.pem, so those will have to be created before using the project. 
+
+4. Once the packages are installed, you can run the application by using the command 'node app.js'. This will start the project on a local server, allowing you to view the set up routes and see everything created in the project. 
+
+
+
+## Authentication Mechanisms:
+
+The authentication methods used for this project include the generation of JSON web tokens when a user logs into the application. This token is used to authenticate the role of the user accessing the Habit Quest website. Different roles, such as admin and regular user, have varying levels of access to different pages on the site, ensuring role-based access control. During the sign up process, users passwords are hashed using Argon2, which helps secure sensitive information. This hashing process ensures that even if a hacker gains access to the database, the passwords remain encrypted and protected, making it significantly harder for unauthorized users to access the accounts. 
+
+I had trouble implementing the sessions into the project, but my plan was to seamlessly allow users to log in through authentication. When a user logs into the website, their session will start. When they eventually choose to log out, their session will be destroyed. If they do not log out, their session will be destroyed after a short period of time. This method helps mitigate various attacks while providing an easy and intuitive user experience.
+
+
+## Role-Based Access:
+
+User Roles for Habit Quest:
+
+* User
+
+This is the basic role that anyone who signs up for the website will have. Users will have access to the routes that have been allocated to them.
+
+
+* Admin
+
+Admins have different permissions from users. Admins can access routes that users cannot. This is beneficial for an app like Habit Quest, as it allows admins to perform tasks such as site maintenance and moderation. For example, on Habit Quest, only admins can access the '/admin' route.
+
+
+## Lessons Learned:
+
+This assignment was incredibly challenging for me. When I completed the labs, I thought I had a good understanding of everything. However, when I started coding the project, I encountered difficulties in many different areas. I struggled with implementing both local authentication and Google OAuth. I think this was due to the schemas being very similar, and I got confused about which dependencies were needed for each method. In the future, I will try to break down my problems more effectively. 
+
+When meeting with Ashlyn, she gave me great advice on breaking down a problem before trying to solve it. I often want to jump right into coding, but I now realize that it’s important to fully understand the specifications of exactly what I will be creating in order to make a better product.I will work on these concepts and prepare myself for the next phase of the assignment.
+
+
+### Reflections
+
+For the authentication method, I chose to implement local authentication with mongodb as the database. To enhance the security, I used argon2 for password hashing. This helped ensure that the sensitive information that we are storing for our clients is protected. For authentication, I decided to generate json web tokens because they work well with mongodb. This approach helped Habit Quest create a seamless authentication for our users. In the future I will figure out how to transfer this process with a better front-end. I was unable to figure out why my information wasn't sending through the form, but it is something that I will work on. Postman allowed me to visualize where the information was going, and how it was being transferred across my backend. 
+
+I structured my access control system with two main roles: user and admin. This approach helped me better understand how to create routes that are accessible only to specific users. It was interesting to see this process in action through the Schema when connecting to the MongoDB database, as it allowed me to log each person's role. Initially, I had trouble saving the roles correctly, but after troubleshooting the syntax errors I encountered, I was able to establish a working connection and successfully implement the system.
+
+Because I was unable to get a functioning front-end, I was unable to implement the JWT storage. If I was to get this to work, I would have chosen the HTTPOnly cookie. From my research, I found this method to be much more secure in storing sensitive information, in particular helping avoid cross-side scripting attacks. 
+
+

@@ -20,7 +20,7 @@ const bodyParser = require('body-parser');
 
 app.use(
     helmet({
-        xFrameOptions: { action: "deny" },
+        xFrameOptions: { action: "deny" }, 
         strictTransportSecurity: {
             maxAge: 31556952, // 1 year
             preload: true
@@ -81,6 +81,43 @@ app.get('/login', (req, res) => {
 });
 
 
+
+// Part B: Control Access with Role-Based Permissions
+
+const authRoutes = require("./routes/auth");
+const adminRoutes = require("./routes/admin");
+const authorize = require("./middlewares/authorize");
+const authMiddleware = require("./middlewares/auth");
+const userRoutes = require("./routes/user");
+
+app.use(express.json());
+app.use("/api/auth", authRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/user", userRoutes);
+
+
+// /admin route
+app.get("/admin", authMiddleware, authorize("admin"), (req, res) => {
+    res.status(200).json({ message: "Welcome admin users" });
+});
+
+//try this with admin route above`
+
+// profile route
+app.get("/profile", authMiddleware, authorize("user"), (req, res) => {
+    res.status(200).json({ message: "Welcome admin users" });
+});
+
+// dashboard route
+app.get("/dashboard", authMiddleware, authorize("user"), (req, res) => {
+    res.status(200).json({ message: "Welcome admin users" });
+});
+
+
+
+
+
+
 const hstsOptions = {
     maxAge: 31536000, 
     includeSubDomains: true, 
@@ -111,10 +148,7 @@ console.log(`PORT_HTTP is set to: ${PORT_HTTP}`);
 
 
 
-
-
-
-
+// Connect to MongoDB
 
 app.use(bodyParser.json());
 
@@ -125,18 +159,8 @@ mongoose.connect('mongodb://localhost:27017/habitQuestUserAuth', {
     .catch(err => console.log(err));
 
 
-// import routes and start server
-const authRoutes = require('./routes/auth');
 
-app.use('/api/auth', authRoutes);
-
+// Run Server
 
 app.listen(PORT, () => console.log(`Server 
 running on port ${PORT}`));
-
-// import admin.js route
-const adminRoutes = require('./routes/admin');
-app.use('/api/admin', adminRoutes);
-
-
-console.log(process.env.JWT_SECRET);
